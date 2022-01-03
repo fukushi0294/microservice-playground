@@ -1,15 +1,18 @@
 package com.microservice.playground.order.domain.service
 
 import com.microservice.playground.order.domain.model.Order
-import com.microservice.playground.order.domain.repository.MessagePipelineAdaptor
+import com.microservice.playground.order.domain.model.OrderStatus
 import com.microservice.playground.order.domain.repository.OrderRepository
+import com.microservice.playground.order.infrastructure.repository.EventPublisher
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
+@Transactional
 @Service
 class OrderService(private val orderRepository: OrderRepository,
-                   private val messagePipelineAdaptor: MessagePipelineAdaptor) {
+                   private val eventPublisher: EventPublisher) {
     fun createOrder(order: Order) {
         orderRepository.saveOrder(order)
-        messagePipelineAdaptor.publish("order", order)
+        eventPublisher.publish(OrderStatus.ORDER_REQUEST.toString(), order)
     }
 }
