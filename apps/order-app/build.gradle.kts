@@ -17,6 +17,7 @@ repositories {
 }
 
 extra["springCloudVersion"] = "2021.0.0"
+val resilience4jVersion = "1.7.1"
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter")
@@ -30,6 +31,9 @@ dependencies {
 	implementation("software.amazon.awssdk:dynamodb-enhanced:2.17.102")
 	implementation("software.amazon.awssdk:eventbridge:2.17.102")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.13.1")
+	implementation("io.github.resilience4j:resilience4j-circuitbreaker:${resilience4jVersion}")
+	implementation("io.github.resilience4j:resilience4j-ratelimiter:${resilience4jVersion}")
+	implementation("io.github.resilience4j:resilience4j-retry:${resilience4jVersion}")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 

@@ -1,0 +1,6 @@
+aws:
+  dynamoDB:
+    table: "OrderTable"
+  eventBridge:
+    source: "custom.order.app"
+    eventBus: "OrderEvent"
